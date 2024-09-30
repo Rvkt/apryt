@@ -1,5 +1,8 @@
+import 'package:apryt/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import '../screen_dimensions_widget.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -80,10 +83,14 @@ Center _buildBody(BuildContext context) {
 }
 
 Column _buildContent(BuildContext context) {
+  ScreenUtil.init(context);
+  double height = ScreenUtil.screenHeight;
+  double width = ScreenUtil.screenWidth;
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
+
       Text(
         'Welcome to apryt!',
         style: Theme.of(context).textTheme.displayLarge,
@@ -95,6 +102,8 @@ Column _buildContent(BuildContext context) {
         style: Theme.of(context).textTheme.bodyMedium,
         textAlign: TextAlign.center,
       ),
+      const SizedBox(height: 16),
+      ScreenDimensionsWidget(),
     ],
   );
 }
