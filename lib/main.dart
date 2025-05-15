@@ -1,4 +1,5 @@
-import 'package:apryt/intro_screen.dart';
+import 'package:apryt/modules/intro/intro_screen.dart';
+import 'package:apryt/modules/navigation/navigation_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'core/utils/snack_bar_utils.dart';
@@ -20,7 +21,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigoAccent),
         useMaterial3: true,
       ),
-      home: const IntroScreen(), // Set InitialScreen as the home
+      initialRoute: '/',
+      routes: {
+        '/': (context) => IntroScreen(),
+        '/navigation': (context) => NavigationScreen(),
+      },
     );
   }
 }

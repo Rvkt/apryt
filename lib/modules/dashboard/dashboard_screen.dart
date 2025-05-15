@@ -1,8 +1,10 @@
+import 'package:apryt/modules/dashboard/widgets/topic_card.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/app_colors.dart';
-import '../../core/utils/snack_bar_utils.dart';
-import '../../models/topic.dart';
+import '../../data/questions_list.dart';
+import '../../data/topics_list.dart';
+import '../questions/questions_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -17,46 +19,41 @@ class DashboardScreen extends StatelessWidget {
         backgroundColor: AppColors.darkBlue,
         foregroundColor: Colors.white,
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: topics.length,
-        itemBuilder: (context, index) {
-          final topic = topics[index];
-          return GestureDetector(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          GestureDetector(
             onTap: () {
-              SnackBarUtil.show('Navigating to ${topic.title}...');
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => QuestionsScreen(questions: questions),
+                ),
+              );
             },
             child: Card(
               elevation: 0,
-              margin: const EdgeInsets.symmetric(vertical: 8),
+              margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-              color: AppColors.white,
+              color: Colors.white,
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      topic.title,
+                      'Questions',
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF02569B),
                       ),
                     ),
-                    const SizedBox(height: 6),
-                    Text(
-                      'Level: ${topic.level}',
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.black87,
-                      ),
-                    ),
                     const SizedBox(height: 8),
                     Text(
-                      topic.description,
+                      'Flutter related interview questions.',
                       style: const TextStyle(
                         fontSize: 12,
                         color: Colors.black54,
@@ -66,8 +63,23 @@ class DashboardScreen extends StatelessWidget {
                 ),
               ),
             ),
-          );
-        },
+          ),
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: topics.length,
+              itemBuilder: (context, index) {
+                final topic = topics[index];
+                return TopicCard(
+                  topic: topic,
+                  onTap: () {
+                    Navigator.pushNamed(context, topic.route);
+                  },
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
