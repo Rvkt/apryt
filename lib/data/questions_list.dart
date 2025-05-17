@@ -145,12 +145,12 @@ final List<Question> questions = [
 
   // 9. Platform Integration
   Question(
-    question: 'How do you call native code from Flutter?',
+    question: 'How do you call native docs from Flutter?',
     answer: 'Using platform channels and method channels for Android (Kotlin/Java) and iOS (Swift/Obj-C).',
   ),
   Question(
     question: 'What is a method channel?',
-    answer: 'A communication bridge between Dart and native code used to invoke platform-specific functionality.',
+    answer: 'A communication bridge between Dart and native docs used to invoke platform-specific functionality.',
   ),
   Question(
     question: 'Have you ever implemented a platform-specific feature using platform channels?',

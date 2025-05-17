@@ -44,14 +44,14 @@ class TopicCard extends StatelessWidget {
                   color: Colors.black87,
                 ),
               ),
-              const SizedBox(height: 8),
-              Text(
-                topic.description,
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: Colors.black54,
-                ),
-              ),
+              // const SizedBox(height: 8),
+              // Text(
+              //   topic.description,
+              //   style: const TextStyle(
+              //     fontSize: 12,
+              //     color: Colors.black54,
+              //   ),
+              // ),
             ],
           ),
         ),

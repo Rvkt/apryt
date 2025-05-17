@@ -2,6 +2,8 @@ import 'package:apryt/models/topic.dart';
 import 'package:apryt/modules/dashboard/widgets/topic_card.dart';
 import 'package:flutter/material.dart';
 
+import '../markdown/topic_details_screen.dart';
+
 class NavigationScreen extends StatelessWidget {
   const NavigationScreen({super.key});
 
@@ -19,7 +21,8 @@ class NavigationScreen extends StatelessWidget {
           return TopicCard(
             topic: topic,
             onTap: () {
-              Navigator.pushNamed(context, topic.route);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => TopicDetailsScreen(topic: topic)));
+              // Navigator.pushNamed(context, topic.route);
             },
           );
         },
@@ -30,11 +33,11 @@ class NavigationScreen extends StatelessWidget {
 
 final List<Topic> navigationTopics = [
   Topic(
-    title: 'Basic Push Navigation',
-    route: '/basicPush',
-    level: 'Beginner',
-    description: 'Navigate to a new screen using Navigator.push().',
-  ),
+      title: 'Basic Push Navigation',
+      route: '/basicPush',
+      level: 'Beginner',
+      description: 'Navigate to a new screen using Navigator.push().',
+      filePath: 'assets/docs/basicPush.md'),
   Topic(
     title: 'Push Replacement',
     route: '/pushReplacement',
