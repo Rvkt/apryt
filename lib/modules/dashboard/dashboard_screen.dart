@@ -2,8 +2,8 @@ import 'package:apryt/modules/dashboard/widgets/topic_card.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/app_colors.dart';
-import '../../data/questions_list.dart';
-import '../../data/topics_list.dart';
+import '../../data/questions/questions_list.dart';
+import '../../data/topics/topics_list.dart';
 import '../questions/questions_screen.dart';
 
 class DashboardScreen extends StatelessWidget {

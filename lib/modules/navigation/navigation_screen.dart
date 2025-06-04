@@ -1,11 +1,27 @@
-import 'package:apryt/models/topic.dart';
+import 'package:apryt/core/services/markdown_service.dart';
 import 'package:apryt/modules/dashboard/widgets/topic_card.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/utils/snack_bar_utils.dart';
+import '../../data/topics/navigations_topics.dart';
 import '../markdown/topic_details_screen.dart';
 
 class NavigationScreen extends StatelessWidget {
   const NavigationScreen({super.key});
+
+  Future<bool> _loadMarkdown(BuildContext context, {required String filePath}) async {
+    bool exists = await MarkdownService.loadMarkdown(
+      context: context,
+      filePath: filePath,
+    );
+
+    SnackBarUtil.show(
+      exists ? "Markdown file loaded successfully." : "Markdown file not found. Default content is loaded.",
+      backgroundColor: exists ? Colors.green : Colors.red,
+    );
+
+    return exists; // ✅ Add this line
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +36,26 @@ class NavigationScreen extends StatelessWidget {
           final topic = navigationTopics[index];
           return TopicCard(
             topic: topic,
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => TopicDetailsScreen(topic: topic)));
-              // Navigator.pushNamed(context, topic.route);
+            onTap: () async {
+              if (topic.filePath != null) {
+                // Try to load markdown first
+                bool loaded = await _loadMarkdown(context, filePath: topic.filePath!);
+
+                // Only navigate if file was found or fallback markdown was loaded
+                if (context.mounted) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TopicDetailsScreen(topic: topic),
+                    ),
+                  );
+                }
+              } else {
+                SnackBarUtil.show(
+                  'No file path provided for this topic.',
+                  backgroundColor: Colors.red,
+                );
+              }
             },
           );
         },
@@ -30,66 +63,3 @@ class NavigationScreen extends StatelessWidget {
     );
   }
 }
-
-final List<Topic> navigationTopics = [
-  Topic(
-      title: 'Basic Push Navigation',
-      route: '/basicPush',
-      level: 'Beginner',
-      description: 'Navigate to a new screen using Navigator.push().',
-      filePath: 'assets/docs/basicPush.md'),
-  Topic(
-    title: 'Push Replacement',
-    route: '/pushReplacement',
-    level: 'Intermediate',
-    description: 'Replace current screen using Navigator.pushReplacement().',
-  ),
-  Topic(
-    title: 'Push And Remove Until',
-    route: '/pushAndRemoveUntil',
-    level: 'Intermediate',
-    description: 'Clear stack and push a new screen using Navigator.pushAndRemoveUntil().',
-  ),
-  Topic(
-    title: 'Named Route Navigation',
-    route: '/namedRoute',
-    level: 'Beginner',
-    description: 'Navigate using Navigator.pushNamed() with predefined routes.',
-  ),
-  Topic(
-    title: 'Send & Receive Data',
-    route: '/sendData',
-    level: 'Intermediate',
-    description: 'Pass data between screens and return results using Navigator.pop().',
-  ),
-  Topic(
-    title: 'Navigation with Arguments',
-    route: '/arguments',
-    level: 'Intermediate',
-    description: 'Pass complex objects using settings.arguments.',
-  ),
-  Topic(
-    title: 'Bottom Navigation Bar',
-    route: '/bottomNav',
-    level: 'Intermediate',
-    description: 'Switch between tabs using BottomNavigationBar.',
-  ),
-  Topic(
-    title: 'Drawer Navigation',
-    route: '/drawerNav',
-    level: 'Beginner',
-    description: 'Navigate using a side drawer menu.',
-  ),
-  Topic(
-    title: 'PageView Navigation',
-    route: '/pageView',
-    level: 'Advanced',
-    description: 'Implement swipe-based navigation using PageView.',
-  ),
-  Topic(
-    title: 'GoRouter (Flutter 3.0)',
-    route: '/goRouter',
-    level: 'Advanced',
-    description: 'Use declarative navigation with GoRouter for scalable apps.',
-  ),
-];

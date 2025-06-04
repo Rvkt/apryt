@@ -1,4 +1,4 @@
-import '../models/topic.dart';
+import '../../models/topic.dart';
 
 final List<Topic> topics = [
   Topic(title: 'Navigation', route: '/navigation', level: 'Beginner', description: 'Learn how to move between screens.'),

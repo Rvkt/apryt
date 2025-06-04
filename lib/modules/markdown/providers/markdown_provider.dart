@@ -3,18 +3,29 @@ import 'package:flutter/services.dart' show rootBundle;
 
 class MarkdownProvider with ChangeNotifier {
   String _markdownContent = "";
+  bool _isLoading = false;
+
   String get markdownContent => _markdownContent;
+  bool get isLoading => _isLoading;
+
+  /// Sets the loading state and notifies listeners.
+  void setLoading(bool value) {
+    _isLoading = value;
+    notifyListeners();
+  }
 
   /// Loads markdown content from assets, falls back to default if not found.
   Future<bool> loadMarkdownContent(String filePath) async {
+    setLoading(true);
+
     try {
       _markdownContent = await rootBundle.loadString(filePath);
-      notifyListeners();
+      setLoading(false);
       return true; // Successfully loaded the file
     } catch (e) {
       debugPrint("Error loading markdown file: $e. Loading default markdown.");
       _markdownContent = await _loadDefaultMarkdown();
-      notifyListeners();
+      setLoading(false);
       return false; // Failed to load file, fallback to default
     }
   }

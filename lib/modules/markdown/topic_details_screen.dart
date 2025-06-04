@@ -7,55 +7,9 @@ import '../../core/themes/draculaMarkdownTheme.dart';
 import '../../models/topic.dart';
 import '../../modules/markdown/providers/markdown_provider.dart';
 
-class TopicDetailsScreen extends StatefulWidget {
+class TopicDetailsScreen extends StatelessWidget {
   final Topic topic;
-  // final String title;
-  // final String description;
-  // final String filePath;
-
-  const TopicDetailsScreen({
-    super.key,
-    // required this.title,
-    // required this.description,
-    // required this.filePath,
-    required this.topic,
-  });
-
-  @override
-  State<TopicDetailsScreen> createState() => _TopicDetailsScreenState();
-}
-
-class _TopicDetailsScreenState extends State<TopicDetailsScreen> {
-  @override
-  void initState() {
-    super.initState();
-    _loadMarkdown();
-  }
-
-  Future<void> _loadMarkdown() async {
-    final markdownProvider = Provider.of<MarkdownProvider>(context, listen: false);
-    bool exists = await markdownProvider.loadMarkdownContent(widget.topic.filePath!);
-
-    if (context.mounted) {
-      showDialog(
-        context: context,
-        builder: (BuildContext dialogContext) {
-          return AlertDialog(
-            title: Text(exists ? "Success" : "Error"),
-            content: Text(
-              exists ? "Markdown file loaded successfully." : "Markdown file not found. Default content is loaded.",
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(dialogContext).pop(),
-                child: const Text("OK"),
-              ),
-            ],
-          );
-        },
-      );
-    }
-  }
+  const TopicDetailsScreen({super.key, required this.topic});
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +21,7 @@ class _TopicDetailsScreenState extends State<TopicDetailsScreen> {
         foregroundColor: AppColors.darkBlue,
         elevation: 0,
         title: Text(
-          widget.topic.title,
+          topic.title,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
@@ -87,7 +41,7 @@ class _TopicDetailsScreenState extends State<TopicDetailsScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  widget.topic.description,
+                  topic.description,
                   style: const TextStyle(
                     fontSize: 16,
                     fontFamily: 'monospace',
