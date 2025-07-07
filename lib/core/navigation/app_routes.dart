@@ -1,3 +1,4 @@
+import 'package:apryt/features/products/presentation/screens/products_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../modules/dashboard/dashboard_screen.dart';
@@ -8,12 +9,14 @@ class AppRoutes {
   static const String intro = '/';
   static const String home = '/home';
   static const String navigation = '/navigation';
+  static const String infiniteScroll = '/infiniteScroll';
 
   static Map<String, WidgetBuilder> get routes {
     return {
       intro: (context) => IntroScreen(),
       home: (context) => DashboardScreen(),
       navigation: (context) => NavigationScreen(),
+      infiniteScroll: (context) => ProductsScreen(),
     };
   }
 }

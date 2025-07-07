@@ -1,7 +1,6 @@
+import 'package:apryt/core/themes/app_colors.dart';
 import 'package:apryt/modules/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
-
-import '../../core/app_colors.dart';
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});

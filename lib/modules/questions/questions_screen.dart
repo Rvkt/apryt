@@ -1,6 +1,6 @@
+import 'package:apryt/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/app_colors.dart';
 import '../../models/question.dart';
 
 class QuestionsScreen extends StatelessWidget {

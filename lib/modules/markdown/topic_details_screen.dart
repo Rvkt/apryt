@@ -1,4 +1,4 @@
-import 'package:apryt/core/app_colors.dart';
+import 'package:apryt/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:provider/provider.dart';

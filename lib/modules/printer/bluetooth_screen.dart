@@ -148,7 +148,6 @@ Qty Item                    Price         Amount
 1   Maggi 70gm              14.00          14.00
 1   Aashirvaad Atta 5kg     220.00        220.00
 ------------------------------------------------
-
 Subtotal:                                 268.00
 Delivery Fee:                              20.00
 Total Payable:                            288.00
@@ -162,7 +161,7 @@ Mobile: 9876543210
 ------------------------------------------------
 
       Thank you for shopping with FlashMart!
-     For help, call 8757237359 or scan the QR
+            For help, call 8757237359
       Powered by Easyswift Services Pvt Ltd
       \n
 """);
